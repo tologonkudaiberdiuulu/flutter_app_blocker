@@ -10,10 +10,14 @@ object BlockedAppsManager {
     fun updateBlockedApps(context: Context, apps: List<String>) {
         val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         prefs.edit().putStringSet(BLOCKED_APPS_KEY, apps.toSet()).apply()
+        println("✅ Blocked Apps Updated: $apps")
     }
 
     fun getBlockedApps(context: Context): Set<String> {
         val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        return prefs.getStringSet(BLOCKED_APPS_KEY, emptySet()) ?: emptySet()
+        val blocked = prefs.getStringSet(BLOCKED_APPS_KEY, emptySet()) ?: emptySet()
+
+        println("📂 Retrieved Blocked Apps: $blocked")  // ✅ Log when retrieving blocked apps
+        return blocked
     }
 }
